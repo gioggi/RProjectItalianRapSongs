@@ -1,0 +1,335 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Spotify italian rap},
+  pdfauthor={Giovanni Esposito},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifluatex
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\title{Spotify italian rap}
+\author{Giovanni Esposito}
+\date{}
+
+\begin{document}
+\maketitle
+
+\hypertarget{dataset}{%
+\subsection{Dataset}\label{dataset}}
+
+Dataset was created by \url{https://github.com/gioggi/SpotifyScarper}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# put artist and into a data frame and columns mapping}
+\NormalTok{artists }\OtherTok{=} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"/home/gioggi/Documents/ItalianRapSong/data/artist210421.csv"}\NormalTok{)}
+\NormalTok{artists\_mapped }\OtherTok{=} \FunctionTok{rename}\NormalTok{(artists, }
+                 \StringTok{"artist\_id"}\OtherTok{=} \StringTok{"Id"}\NormalTok{,}
+                 \StringTok{"artist\_name"} \OtherTok{=} \StringTok{"Name"}\NormalTok{, }
+                 \StringTok{"artist\_popularity"} \OtherTok{=} \StringTok{"Popularity"}\NormalTok{,}
+                 \StringTok{"artist\_followers"} \OtherTok{=} \StringTok{"Followers"}\NormalTok{,}
+                 \StringTok{"artist\_geners"} \OtherTok{=} \StringTok{"Generes"}\NormalTok{) }
+\NormalTok{artist\_color }\OtherTok{\textless{}{-}} \FunctionTok{rainbow}\NormalTok{(}\FunctionTok{nrow}\NormalTok{(artists\_mapped))}
+\NormalTok{artists\_mapped }\OtherTok{=} \FunctionTok{cbind}\NormalTok{(artists\_mapped,artist\_color)}
+\CommentTok{\# put track and into a data frame}
+\NormalTok{tracks }\OtherTok{=} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"/home/gioggi/Documents/ItalianRapSong/data/track210421.csv"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(Id) }
+
+\NormalTok{tracks}\SpecialCharTok{$}\NormalTok{album\_release\_date }\OtherTok{\textless{}{-}} \FunctionTok{as.Date}\NormalTok{(tracks}\SpecialCharTok{$}\NormalTok{album\_release\_date, }\StringTok{\textquotesingle{}\%Y\textquotesingle{}}\NormalTok{)}
+\CommentTok{\# left join between tracks and artists}
+\CommentTok{\# merge( x= tracks, y = artists\_mapped, by = "artist\_id", all.x = TRUE, fill={-}9999)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{how-are-the-50-more-popular-italian-rap-artist-now-for-spotify}{%
+\subsubsection{How are the 50 more popular italian rap artist now for
+Spotify?}\label{how-are-the-50-more-popular-italian-rap-artist-now-for-spotify}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# order artist by popularity}
+\NormalTok{popular\_artists }\OtherTok{=} \FunctionTok{head}\NormalTok{(artists\_mapped[}\FunctionTok{order}\NormalTok{(artists\_mapped}\SpecialCharTok{$}\NormalTok{artist\_popularity, }\AttributeTok{decreasing=}\NormalTok{ T),], }\AttributeTok{n =} \DecValTok{50}\NormalTok{)}
+
+\CommentTok{\# chart}
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data=}\NormalTok{popular\_artists, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{artist\_popularity, }\AttributeTok{y=}\FunctionTok{reorder}\NormalTok{(artist\_name,artist\_popularity))) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat=}\StringTok{"identity"}\NormalTok{, }\AttributeTok{fill=}\NormalTok{popular\_artists}\SpecialCharTok{$}\NormalTok{artist\_color )}\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.line=}\FunctionTok{element\_blank}\NormalTok{(),}
+          \AttributeTok{axis.title.y=}\FunctionTok{element\_blank}\NormalTok{(),}
+          \AttributeTok{panel.background=}\FunctionTok{element\_blank}\NormalTok{()) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{italianRapSong_files/figure-latex/artist by popularity-1} \end{center}
+
+\hypertarget{how-are-the-50-more-followed-italian-rap-artist-now-for-spotify}{%
+\subsubsection{How are the 50 more followed italian rap artist now for
+Spotify?}\label{how-are-the-50-more-followed-italian-rap-artist-now-for-spotify}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# order artist by followers}
+\NormalTok{followest\_artists }\OtherTok{=} \FunctionTok{head}\NormalTok{(artists\_mapped[}\FunctionTok{order}\NormalTok{(artists\_mapped}\SpecialCharTok{$}\NormalTok{artist\_followers, }\AttributeTok{decreasing=}\NormalTok{ T),], }\AttributeTok{n =} \DecValTok{50}\NormalTok{)}
+
+\CommentTok{\# chart}
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data=}\NormalTok{followest\_artists, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{artist\_followers, }\AttributeTok{y=}\FunctionTok{reorder}\NormalTok{(artist\_name,artist\_followers))) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat=}\StringTok{"identity"}\NormalTok{, }\AttributeTok{fill=}\NormalTok{followest\_artists}\SpecialCharTok{$}\NormalTok{artist\_color)}\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.line=}\FunctionTok{element\_blank}\NormalTok{(),}
+          \AttributeTok{axis.title.x=}\FunctionTok{element\_blank}\NormalTok{(),}
+          \AttributeTok{axis.title.y=}\FunctionTok{element\_blank}\NormalTok{(),}
+          \AttributeTok{panel.background=}\FunctionTok{element\_blank}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{italianRapSong_files/figure-latex/artist by followers-1} \end{center}
+
+\hypertarget{match-popularity-and-followers-for-top-50-artitst}{%
+\subsubsection{Match popularity and followers for top 50
+artitst!}\label{match-popularity-and-followers-for-top-50-artitst}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{artist\_songs\_number }\OtherTok{=} \FunctionTok{merge}\NormalTok{( }\AttributeTok{x=}\NormalTok{ tracks, }\AttributeTok{y =}\NormalTok{ popular\_artists, }\AttributeTok{by =} \StringTok{"artist\_id"}\NormalTok{, }\AttributeTok{all.x =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{fill=}\SpecialCharTok{{-}}\DecValTok{9999}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{count}\NormalTok{(artist\_id, }\AttributeTok{name =} \StringTok{"n\_songs"}\NormalTok{)}
+\NormalTok{artist\_sum\_popularity }\OtherTok{=} \FunctionTok{merge}\NormalTok{( }\AttributeTok{x=}\NormalTok{ tracks, }\AttributeTok{y =}\NormalTok{ popular\_artists, }\AttributeTok{by =} \StringTok{"artist\_id"}\NormalTok{, }\AttributeTok{all.x =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{fill=}\SpecialCharTok{{-}}\DecValTok{9999}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(artist\_id) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{tot\_popularity =} \FunctionTok{sum}\NormalTok{(popularity))}
+
+\NormalTok{top\_artists }\OtherTok{=} \FunctionTok{merge}\NormalTok{( }\AttributeTok{x=}\NormalTok{ artist\_songs\_number, }\AttributeTok{y =}\NormalTok{ popular\_artists, }\AttributeTok{by =} \StringTok{"artist\_id"}\NormalTok{, }\AttributeTok{all.x =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{fill=}\SpecialCharTok{{-}}\DecValTok{9999}\NormalTok{)}
+\NormalTok{top\_artists }\OtherTok{=} \FunctionTok{merge}\NormalTok{( }\AttributeTok{x=}\NormalTok{ artist\_sum\_popularity, }\AttributeTok{y =}\NormalTok{ top\_artists, }\AttributeTok{by =} \StringTok{"artist\_id"}\NormalTok{, }\AttributeTok{all.x =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{fill=}\SpecialCharTok{{-}}\DecValTok{9999}\NormalTok{)}
+\NormalTok{top\_artists[}\StringTok{\textquotesingle{}average\_popularity\textquotesingle{}}\NormalTok{] }\OtherTok{=}\NormalTok{ top\_artists[}\StringTok{\textquotesingle{}tot\_popularity\textquotesingle{}}\NormalTok{]}\SpecialCharTok{/}\NormalTok{top\_artists[}\StringTok{\textquotesingle{}n\_songs\textquotesingle{}}\NormalTok{]}
+  \FunctionTok{ggplot}\NormalTok{(top\_artists, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{tot\_popularity, }\AttributeTok{y=}\NormalTok{artist\_followers, }\AttributeTok{size=}\NormalTok{n\_songs)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{alpha=}\FloatTok{0.5}\NormalTok{, }\AttributeTok{shape=}\DecValTok{21}\NormalTok{, }\AttributeTok{color=}\StringTok{"black"}\NormalTok{, }\AttributeTok{fill=}\NormalTok{top\_artists}\SpecialCharTok{$}\NormalTok{artist\_color) }\SpecialCharTok{+}
+    \FunctionTok{theme}\NormalTok{(}\AttributeTok{legend.position=}\StringTok{"bottom"}\NormalTok{,}
+          \AttributeTok{axis.title.y=}\FunctionTok{element\_blank}\NormalTok{()) }\SpecialCharTok{+}
+    \FunctionTok{scale\_size}\NormalTok{(}\AttributeTok{range =} \FunctionTok{c}\NormalTok{(.}\DecValTok{1}\NormalTok{, }\DecValTok{24}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{italianRapSong_files/figure-latex/match popularity and followers-1} \end{center}
+
+\hypertarget{the-stats-for-all-songs-by-spotify}{%
+\subsubsection{The stats for all songs by
+Spotify!}\label{the-stats-for-all-songs-by-spotify}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{danceability }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(tracks, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ popularity, }\AttributeTok{y =}\NormalTok{ danceability)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{color=}\StringTok{"purple"}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.2}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{se=}\ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\NormalTok{energy }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(tracks, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ popularity, }\AttributeTok{y =}\NormalTok{ energy)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{color=}\StringTok{"red"}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.2}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{se=}\ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\NormalTok{speechiness }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(tracks, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ popularity, }\AttributeTok{y =}\NormalTok{ speechiness)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{color=}\StringTok{"lightblue"}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.2}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{se=}\ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\NormalTok{liveness }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(tracks, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ popularity, }\AttributeTok{y =}\NormalTok{ liveness)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{color=}\StringTok{"green"}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.2}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{se=}\ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\NormalTok{valence }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(tracks, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ popularity, }\AttributeTok{y =}\NormalTok{ valence)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{color=}\StringTok{"blue"}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.2}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{se=}\ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\NormalTok{duration\_ms }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(tracks, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ popularity, }\AttributeTok{y =}\NormalTok{ duration\_ms)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{color=}\StringTok{"orange"}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.2}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{se=}\ConstantTok{FALSE}\NormalTok{)}
+
+\FunctionTok{grid.arrange}\NormalTok{(danceability,energy, speechiness,liveness,valence,duration\_ms)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{italianRapSong_files/figure-latex/point stats-1} \end{center}
+
+\hypertarget{spotify-stats-for-top-200-popular-tracks}{%
+\subsubsection{Spotify stats for top 200 popular
+tracks!}\label{spotify-stats-for-top-200-popular-tracks}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{top\_200\_popular\_tracks }\OtherTok{=} \FunctionTok{head}\NormalTok{(tracks[}\FunctionTok{order}\NormalTok{(tracks}\SpecialCharTok{$}\NormalTok{popularity, }\AttributeTok{decreasing=}\NormalTok{ T),], }\AttributeTok{n =} \DecValTok{200}\NormalTok{)}
+
+
+\NormalTok{top\_danceability }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(top\_200\_popular\_tracks, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ popularity, }\AttributeTok{y =}\NormalTok{ danceability)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{fill=}\StringTok{"purple"}\NormalTok{)}
+\NormalTok{top\_energy }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(top\_200\_popular\_tracks, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ popularity, }\AttributeTok{y =}\NormalTok{ energy)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{fill=}\StringTok{"red"}\NormalTok{)}
+\NormalTok{top\_speechiness }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(top\_200\_popular\_tracks, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ popularity, }\AttributeTok{y =}\NormalTok{ speechiness)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{fill=}\StringTok{"lightblue"}\NormalTok{)}
+\NormalTok{top\_liveness }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(top\_200\_popular\_tracks, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ popularity, }\AttributeTok{y =}\NormalTok{ liveness)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{fill=}\StringTok{"green"}\NormalTok{)}
+\NormalTok{top\_valence }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(top\_200\_popular\_tracks, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ popularity, }\AttributeTok{y =}\NormalTok{ valence)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{fill=}\StringTok{"blue"}\NormalTok{)}
+\NormalTok{top\_duration\_ms }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(top\_200\_popular\_tracks, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ popularity, }\AttributeTok{y =}\NormalTok{ duration\_ms)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{fill=}\StringTok{"orange"}\NormalTok{)}
+
+\FunctionTok{grid.arrange}\NormalTok{(top\_danceability,top\_energy,top\_speechiness,top\_liveness,top\_valence,top\_duration\_ms)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{italianRapSong_files/figure-latex/boxplot stats top 200 populars-1} \end{center}
+
+\hypertarget{spotify-stats-in-the-time}{%
+\subsubsection{Spotify stats in the
+time!}\label{spotify-stats-in-the-time}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{year\_top\_danceability }\OtherTok{=}\NormalTok{ tracks }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(album\_release\_date) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{top\_danceability =} \FunctionTok{median}\NormalTok{(danceability))}
+
+\NormalTok{year\_top\_danceability\_charts }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(year\_top\_danceability, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ album\_release\_date,}\AttributeTok{y =}\NormalTok{ top\_danceability)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{(}\AttributeTok{color=}\StringTok{"purple"}\NormalTok{, }\AttributeTok{size=}\FloatTok{1.2}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+
+\NormalTok{year\_top\_energy }\OtherTok{=}\NormalTok{ tracks }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(album\_release\_date) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{top\_energy =} \FunctionTok{median}\NormalTok{(energy))}
+
+\NormalTok{year\_top\_energy\_charts }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(year\_top\_energy, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{album\_release\_date,}\AttributeTok{y =}\NormalTok{ top\_energy)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{(}\AttributeTok{color=}\StringTok{"red"}\NormalTok{, }\AttributeTok{size=}\FloatTok{1.2}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+
+\NormalTok{year\_top\_speechiness }\OtherTok{=}\NormalTok{ tracks }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(album\_release\_date) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{top\_speechiness =} \FunctionTok{median}\NormalTok{(speechiness))}
+
+\NormalTok{year\_top\_speechiness\_charts }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(year\_top\_speechiness, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ album\_release\_date, }\AttributeTok{y =}\NormalTok{ top\_speechiness)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{(}\AttributeTok{color=}\StringTok{"lightblue"}\NormalTok{, }\AttributeTok{size=}\FloatTok{1.2}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+
+\NormalTok{year\_top\_liveness }\OtherTok{=}\NormalTok{ tracks }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(album\_release\_date) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{top\_liveness =} \FunctionTok{median}\NormalTok{(liveness))}
+
+\NormalTok{year\_top\_liveness\_charts }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(year\_top\_liveness, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ album\_release\_date, }\AttributeTok{y =}\NormalTok{ top\_liveness)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{(}\AttributeTok{color=}\StringTok{"green"}\NormalTok{, }\AttributeTok{size=}\FloatTok{1.2}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+
+\NormalTok{year\_top\_valence }\OtherTok{=}\NormalTok{ tracks }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(album\_release\_date) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{top\_valence =} \FunctionTok{median}\NormalTok{(valence))}
+
+\NormalTok{year\_top\_valence\_charts }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(year\_top\_valence, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ album\_release\_date, }\AttributeTok{y =}\NormalTok{ top\_valence)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{(}\AttributeTok{color=}\StringTok{"blue"}\NormalTok{, }\AttributeTok{size=}\FloatTok{1.2}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+
+\NormalTok{year\_top\_duration\_ms }\OtherTok{=}\NormalTok{ tracks }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(album\_release\_date) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{top\_duration\_ms =} \FunctionTok{median}\NormalTok{(duration\_ms))}
+
+\NormalTok{year\_top\_duration\_ms\_charts }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(year\_top\_duration\_ms, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ album\_release\_date, }\AttributeTok{y =}\NormalTok{ top\_duration\_ms)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{(}\AttributeTok{color=}\StringTok{"orange"}\NormalTok{, }\AttributeTok{size=}\FloatTok{1.2}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+
+\FunctionTok{grid.arrange}\NormalTok{(year\_top\_danceability\_charts,}
+\NormalTok{             year\_top\_energy\_charts, }
+\NormalTok{             year\_top\_speechiness\_charts, }
+\NormalTok{             year\_top\_liveness\_charts,}
+\NormalTok{             year\_top\_valence\_charts,}
+\NormalTok{             year\_top\_duration\_ms\_charts)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{italianRapSong_files/figure-latex/stats by date-1} \end{center}
+
+\end{document}
