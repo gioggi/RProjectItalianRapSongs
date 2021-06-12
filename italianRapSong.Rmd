@@ -35,6 +35,7 @@ library(RColorBrewer)
 library(scales)
 
 ```
+    
 ## Dataset
 
 Dataset was created by https://github.com/gioggi/SpotifyScarper.
@@ -101,6 +102,12 @@ ggplot(data = followest_artists, aes(x = artist_followers, y = reorder(artist_na
 ```
 
 ## Match popularity and followers for top 50 artitst!
+```{css, echo=FALSE}
+    .slides {
+      zoom: 1 !important;
+    }
+
+```
 ```{r match popularity and followers, message=FALSE, echo=FALSE}
 artist_songs_number = merge(
   x = tracks,
@@ -136,10 +143,11 @@ top_artists = merge(
 )
 top_artists['average_popularity'] = top_artists['tot_popularity'] / top_artists['n_songs']
 p <- top_artists %>%
-ggplot(aes(tot_popularity, artist_followers, size = n_songs, color=artist_color, label=artist_name)) +
+ggplot(aes(tot_popularity, artist_followers, size = n_songs, color=artist_color, label=artist_name),x.title="aw") +
   geom_point() +
-  theme_dark() 
-ggplotly(p,tooltip = "artist_name",)
+  theme_dark() +
+  theme(legend.position='none')
+ggplotly(p,tooltip = "artist_name")
 
 ```
 
