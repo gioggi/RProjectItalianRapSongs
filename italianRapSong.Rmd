@@ -1,14 +1,24 @@
 ---
 title: "Spotify italian rap"
-output: html_document
-author: Giovanni Esposito
-editor_options: 
+author: "Giovanni Esposito"
+output:
+  revealjs::revealjs_presentation:
+    theme: moon
+    highlight: haddock
+editor_options:
   chunk_output_type: inline
 ---
 
 ```{r setup, include=FALSE}
 # cache results
-knitr::opts_chunk$set(cache=TRUE, echo = TRUE, eval = TRUE, message=FALSE, warning = FALSE, fig.align='center')
+knitr::opts_chunk$set(
+  cache = TRUE,
+  echo = TRUE,
+  eval = TRUE,
+  message = FALSE,
+  warning = FALSE,
+  fig.align = 'center'
+)
 
 ```
 
@@ -16,6 +26,8 @@ knitr::opts_chunk$set(cache=TRUE, echo = TRUE, eval = TRUE, message=FALSE, warni
 ```{r library, include=FALSE}
 library(tidyverse)
 library(ggplot2)
+library(plotly)
+library(gapminder)
 library(gridExtra)
 library(grid)
 library(reshape2)
@@ -23,194 +35,343 @@ library(RColorBrewer)
 library(scales)
 
 ```
+    
 ## Dataset
 
-Dataset was created by https://github.com/gioggi/SpotifyScarper.
+<h3>
+Dataset was created use https://github.com/gioggi/SpotifyScarper.<br/>
+Dataset is update to april 2021. <br/>
+about 160 Artists<br/>
+about 11.5k Tracks
+</h3>
+<hr/>
+<h4>
+<b>Key helper</b>:<br/>
+<b>Popularity</b>: Measure the popularity based on play number of the track <br/>
+<b>Valence</b>: a measure of happiness  <br/>
+<b>Liveness</b>: detects the presence of an audience in the recording.  <br/>
+<b>Speechiness</b>: Detects the presence of spoken words in a track. <br/>
+<b>Energy</b>: represents a perceptual measure of intensity and activity. <br/>
+<b>Danceability</b>: describes how suitable a track is for dancing based <br/>
+</h4>
 
-```{r dataset}
+```{r dataset, message=FALSE, echo=FALSE}
+
+
 # put artist and into a data frame and columns mapping
 artists = read_csv("/home/gioggi/Documents/ItalianRapSong/data/artist210421.csv")
-artists_mapped = rename(artists, 
-                 "artist_id"= "Id",
-                 "artist_name" = "Name", 
-                 "artist_popularity" = "Popularity",
-                 "artist_followers" = "Followers",
-                 "artist_geners" = "Generes") 
+artists_mapped = rename(
+  artists,
+  "artist_id" = "Id",
+  "artist_name" = "Name",
+  "artist_popularity" = "Popularity",
+  "artist_followers" = "Followers",
+  "artist_geners" = "Generes"
+)
 artist_color <- rainbow(nrow(artists_mapped))
-artists_mapped = cbind(artists_mapped,artist_color)
+artists_mapped = cbind(artists_mapped, artist_color)
 # put track and into a data frame
-tracks = read_csv("/home/gioggi/Documents/ItalianRapSong/data/track210421.csv") %>% 
-  group_by(Id) 
+tracks = read_csv("/home/gioggi/Documents/ItalianRapSong/data/track210421.csv") %>%
+  group_by(Id)
 
-tracks$album_release_date <- as.Date(tracks$album_release_date, '%Y')
+tracks$album_release_date <-
+  as.Date(tracks$album_release_date, '%Y')
 # left join between tracks and artists
 # merge( x= tracks, y = artists_mapped, by = "artist_id", all.x = TRUE, fill=-9999)
 ```
 
 
-### How are the 50 more popular italian rap artist now for Spotify?
+## How are the 50 more popular italian rap artist now for Spotify?
 
-```{r artist by popularity}
+```{r artist by popularity, message=FALSE, echo=FALSE}
 # order artist by popularity
-popular_artists = head(artists_mapped[order(artists_mapped$artist_popularity, decreasing= T),], n = 50)
+popular_artists = head(artists_mapped[order(artists_mapped$artist_popularity, decreasing = T),], n = 50)
 
 # chart
-ggplot(data=popular_artists, aes(x=artist_popularity, y=reorder(artist_name,artist_popularity))) +
-  geom_bar(stat="identity", fill=popular_artists$artist_color )+
-  theme(axis.line=element_blank(),
-          axis.title.y=element_blank(),
-          panel.background=element_blank()) 
+ggplot(data = popular_artists, aes(x = artist_popularity, y = reorder(artist_name, artist_popularity))) +
+  geom_bar(stat = "identity", fill = popular_artists$artist_color) +
+  theme_dark() +
+  theme(
+    axis.line = element_blank(),
+    axis.title.y = element_blank()
+  ) +
+  xlab('Artist popularity')
 ```
 
-### How are the 50 more followed italian rap artist now for Spotify?
 
-```{r artist by followers}
+## How are the 50 more followed italian rap artist now for Spotify?
+
+```{r artist by followers, message=FALSE, echo=FALSE}
 # order artist by followers
-followest_artists = head(artists_mapped[order(artists_mapped$artist_followers, decreasing= T),], n = 50)
+followest_artists = head(artists_mapped[order(artists_mapped$artist_followers, decreasing = T), ], n = 50)
 
 # chart
-ggplot(data=followest_artists, aes(x=artist_followers, y=reorder(artist_name,artist_followers))) +
-  geom_bar(stat="identity", fill=followest_artists$artist_color)+
-  theme(axis.line=element_blank(),
-          axis.title.x=element_blank(),
-          axis.title.y=element_blank(),
-          panel.background=element_blank())
+ggplot(data = followest_artists, aes(x = artist_followers, y = reorder(artist_name, artist_followers))) +
+  geom_bar(stat = "identity", fill = followest_artists$artist_color) +
+  theme_dark()  +
+  theme(
+    axis.line = element_blank(),
+    axis.title.y = element_blank()
+  )+
+  xlab('Number of followers')
 
 ```
 
-### Match popularity and followers for top 50 artitst!
-```{r match popularity and followers}
-artist_songs_number = merge( x= tracks, y = popular_artists, by = "artist_id", all.x = FALSE, fill=-9999) %>%
+# Matched popularity and followers for top 50 artists!
+```{css, echo=FALSE}
+    .slides {
+      zoom: 1 !important;
+    }
+
+```
+```{r match popularity and followers, message=FALSE, echo=FALSE}
+artist_songs_number = merge(
+  x = tracks,
+  y = popular_artists,
+  by = "artist_id",
+  all.x = FALSE,
+  fill = -9999
+) %>%
   count(artist_id, name = "n_songs")
-artist_sum_popularity = merge( x= tracks, y = popular_artists, by = "artist_id", all.x = FALSE, fill=-9999) %>%
+artist_sum_popularity = merge(
+  x = tracks,
+  y = popular_artists,
+  by = "artist_id",
+  all.x = FALSE,
+  fill = -9999
+) %>%
   group_by(artist_id) %>%
   summarise(tot_popularity = sum(popularity))
 
-top_artists = merge( x= artist_songs_number, y = popular_artists, by = "artist_id", all.x = FALSE, fill=-9999)
-top_artists = merge( x= artist_sum_popularity, y = top_artists, by = "artist_id", all.x = FALSE, fill=-9999)
-top_artists['average_popularity'] = top_artists['tot_popularity']/top_artists['n_songs']
-  ggplot(top_artists, aes(x=tot_popularity, y=artist_followers, size=n_songs)) +
-    geom_point(alpha=0.5, shape=21, color="black", fill=top_artists$artist_color) +
-    theme(legend.position="bottom",
-          axis.title.y=element_blank()) +
-    scale_size(range = c(.1, 24))
+top_artists = merge(
+  x = artist_songs_number,
+  y = popular_artists,
+  by = "artist_id",
+  all.x = FALSE,
+  fill = -9999
+)
+top_artists = merge(
+  x = artist_sum_popularity,
+  y = top_artists,
+  by = "artist_id",
+  all.x = FALSE,
+  fill = -9999
+)
+p <- top_artists %>%
+ggplot(aes(tot_popularity, artist_followers, size = n_songs, color=artist_color, label=artist_name),x.title="aw") +
+  geom_point() +
+  theme_dark() +
+  theme(legend.position='none') +
+  xlab('Total popularity')
+ggplotly(p,tooltip = c("artist_name","n_songs","artist_followers","tot_popularity"))
 
 ```
 
 
-### The stats for all songs by Spotify!
-```{r point stats}
+## Matched average popularity and followers for top 50 artists!
+```{r match popularity and followers with average, message=FALSE, echo=FALSE}
+top_artists['average_popularity'] = top_artists['tot_popularity'] / top_artists['n_songs']
+p <- top_artists %>%
+ggplot(aes(average_popularity, artist_followers, size = n_songs, color=artist_color, label=artist_name),x.title="aw") +
+  geom_point() +
+  theme_dark() +
+  theme(legend.position='none') +
+  xlab('Average popularity')
+ggplotly(p,tooltip = c("artist_name","n_songs","artist_followers","tot_popularity"))
 
-danceability <- ggplot(tracks, aes(x = popularity, y = danceability)) +
-  geom_point(color="purple", alpha = 0.2) +
-  geom_smooth(se=FALSE) +
-  theme_bw()
+```
+
+
+# The stats for all songs by Spotify!
+```{r point stats, message=FALSE, echo=FALSE}
+
+danceability <-
+  ggplot(tracks, aes(x = popularity, y = danceability)) +
+  geom_point(color = "purple", alpha = 0.2) +
+  geom_smooth(se = FALSE) +
+  theme_dark()+
+  xlab('Popularity')+
+  ylab('Danceability')
 energy <- ggplot(tracks, aes(x = popularity, y = energy)) +
-  geom_point(color="red", alpha = 0.2) +
-  geom_smooth(se=FALSE) +
-  theme_bw()
-speechiness <- ggplot(tracks, aes(x = popularity, y = speechiness)) +
-  geom_point(color="lightblue", alpha = 0.2) +
-  geom_smooth(se=FALSE) +
-  theme_bw()
+  geom_point(color = "red", alpha = 0.2) +
+  geom_smooth(se = FALSE) +
+  theme_dark()  +
+  xlab('Popularity')+
+  ylab('Energy')
+speechiness <-
+  ggplot(tracks, aes(x = popularity, y = speechiness)) +
+  geom_point(color = "lightblue", alpha = 0.2) +
+  geom_smooth(se = FALSE) +
+  theme_dark()+
+  xlab('Popularity')+
+  ylab('Speechiness')
 liveness <- ggplot(tracks, aes(x = popularity, y = liveness)) +
-  geom_point(color="green", alpha = 0.2) +
-  geom_smooth(se=FALSE) +
-  theme_bw()
+  geom_point(color = "green", alpha = 0.2) +
+  geom_smooth(se = FALSE) +
+  theme_dark()+
+  xlab('Popularity')+
+  ylab('Liveness')
 valence <- ggplot(tracks, aes(x = popularity, y = valence)) +
-  geom_point(color="blue", alpha = 0.2) +
-  geom_smooth(se=FALSE) +
-  theme_bw()
-duration_ms <- ggplot(tracks, aes(x = popularity, y = duration_ms)) +
-  geom_point(color="orange", alpha = 0.2) +
-  geom_smooth(se=FALSE)
+  geom_point(color = "blue", alpha = 0.2) +
+  geom_smooth(se = FALSE) +
+  theme_dark()+
+  xlab('Popularity')+
+  ylab('Valence')
+duration_ms <-
+  ggplot(tracks, aes(x = popularity, y = duration_ms)) +
+  geom_point(color = "orange", alpha = 0.2) +
+  geom_smooth(se = FALSE) +
+  theme_dark()+
+  xlab('Popularity')+
+  ylab('Duration ms')
 
-grid.arrange(danceability,energy, speechiness,liveness,valence,duration_ms)
-
-```
-
-
-
-### Spotify stats for top 200 popular tracks!
-```{r boxplot stats top 200 populars}
-
-top_200_popular_tracks = head(tracks[order(tracks$popularity, decreasing= T),], n = 200)
-
-
-top_danceability <- ggplot(top_200_popular_tracks, aes(x = popularity, y = danceability)) +
-  geom_boxplot(fill="purple")
-top_energy <- ggplot(top_200_popular_tracks, aes(x = popularity, y = energy)) +
-  geom_boxplot(fill="red")
-top_speechiness <- ggplot(top_200_popular_tracks, aes(x = popularity, y = speechiness)) +
-  geom_boxplot(fill="lightblue")
-top_liveness <- ggplot(top_200_popular_tracks, aes(x = popularity, y = liveness)) +
-  geom_boxplot(fill="green")
-top_valence <- ggplot(top_200_popular_tracks, aes(x = popularity, y = valence)) +
-  geom_boxplot(fill="blue")
-top_duration_ms <- ggplot(top_200_popular_tracks, aes(x = popularity, y = duration_ms)) +
-  geom_boxplot(fill="orange")
-
-grid.arrange(top_danceability,top_energy,top_speechiness,top_liveness,top_valence,top_duration_ms)
+grid.arrange(danceability,
+             energy,
+             speechiness,
+             liveness,
+             valence,
+             duration_ms)
 
 ```
 
-### Spotify stats in the time!
-```{r stats by date}
 
-year_top_danceability = tracks %>%
+
+## Spotify stats for top 200 popular tracks!
+```{r boxplot stats top 200 populars, message=FALSE, echo=FALSE}
+
+
+top_200_popular_tracks = head(tracks[order(tracks$popularity, decreasing = T), ], n = 200)
+
+
+top_danceability <-
+  ggplot(top_200_popular_tracks, aes(x = popularity, y = danceability)) +
+  geom_boxplot(fill = "purple") +
+  theme_dark() +
+  xlab('Popularity')+
+  ylab('Danceability')
+top_energy <-
+  ggplot(top_200_popular_tracks, aes(x = popularity, y = energy)) +
+  geom_boxplot(fill = "red") +
+  theme_dark()  +
+  xlab('Popularity')+
+  ylab('Energy')
+top_speechiness <-
+  ggplot(top_200_popular_tracks, aes(x = popularity, y = speechiness)) +
+  geom_boxplot(fill = "lightblue") +
+  theme_dark() +
+  xlab('Popularity')+
+  ylab('Speechiness')
+top_liveness <-
+  ggplot(top_200_popular_tracks, aes(x = popularity, y = liveness)) +
+  geom_boxplot(fill = "green") +
+  theme_dark() +
+  xlab('Popularity')+
+  ylab('Liveness')
+top_valence <-
+  ggplot(top_200_popular_tracks, aes(x = popularity, y = valence)) +
+  geom_boxplot(fill = "blue") +
+  theme_dark() +
+  xlab('Popularity')+
+  ylab('Valence')
+top_duration_ms <-
+  ggplot(top_200_popular_tracks, aes(x = popularity, y = duration_ms)) +
+  geom_boxplot(fill = "orange") +
+  theme_dark()+
+  xlab('Popularity')+
+  ylab('Duration ms')
+
+grid.arrange(
+  top_danceability,
+  top_energy,
+  top_speechiness,
+  top_liveness,
+  top_valence,
+  top_duration_ms
+)
+
+```
+
+# Spotify median stats in the time!
+```{r stats by date, message=FALSE, echo=FALSE}
+
+
+year_median_danceability = tracks %>%
   group_by(album_release_date) %>%
-  summarise(top_danceability = median(danceability))
+  summarise(median_danceability = mean(danceability))
 
-year_top_danceability_charts <- ggplot(year_top_danceability, aes(x = album_release_date,y = top_danceability)) +
-  geom_line(color="purple", size=1.2)+
-  theme_bw()
+year_median_danceability_charts <-
+  ggplot(year_median_danceability,
+         aes( album_release_date, median_danceability)) +
+  geom_line(color = "purple", size = 1.2) +
+  theme_dark()+
+  xlab('Album release date')+
+  ylab('Danceability')
 
-year_top_energy = tracks %>%
+year_median_energy = tracks %>%
   group_by(album_release_date) %>%
-  summarise(top_energy = median(energy))
+  summarise(median_energy = mean(energy))
 
-year_top_energy_charts <- ggplot(year_top_energy, aes(x =album_release_date,y = top_energy)) +
-  geom_line(color="red", size=1.2)+
-  theme_bw()
+year_median_energy_charts <-
+  ggplot(year_median_energy, aes( album_release_date, median_energy)) +
+  geom_line(color = "red", size = 1.2) +
+  theme_dark()+
+  xlab('Album release date')+
+  ylab('Energy')
 
-year_top_speechiness = tracks %>%
+year_median_speechiness = tracks %>%
   group_by(album_release_date) %>%
-  summarise(top_speechiness = median(speechiness))
+  summarise(median_speechiness = mean(speechiness))
 
-year_top_speechiness_charts <- ggplot(year_top_speechiness, aes(x = album_release_date, y = top_speechiness)) +
-  geom_line(color="lightblue", size=1.2)+
-  theme_bw()
+year_median_speechiness_charts <-
+  ggplot(year_median_speechiness,
+         aes(album_release_date,median_speechiness)) +
+  geom_line(color = "lightblue", size = 1.2) +
+  theme_dark()+
+  xlab('Album release date')+
+  ylab('Speechiness')
 
-year_top_liveness = tracks %>%
+year_median_liveness = tracks %>%
   group_by(album_release_date) %>%
-  summarise(top_liveness = median(liveness))
+  summarise(median_liveness = mean(liveness))
 
-year_top_liveness_charts <- ggplot(year_top_liveness, aes(x = album_release_date, y = top_liveness)) +
-  geom_line(color="green", size=1.2)+
-  theme_bw()
+year_median_liveness_charts <-
+  ggplot(year_median_liveness, aes(album_release_date, median_liveness)) +
+  geom_line(color = "green", size = 1.2) +
+  theme_dark()+
+  xlab('Album release date')+
+  ylab('Liveness')
 
-year_top_valence = tracks %>%
+year_median_valence = tracks %>%
   group_by(album_release_date) %>%
-  summarise(top_valence = median(valence))
+  summarise(median_valence = mean(valence))
 
-year_top_valence_charts <- ggplot(year_top_valence, aes(x = album_release_date, y = top_valence)) +
-  geom_line(color="blue", size=1.2)+
-  theme_bw()
+year_median_valence_charts <-
+  ggplot(year_median_valence, aes(album_release_date,median_valence)) +
+  geom_line(color = "blue", size = 1.2) +
+  theme_dark()+
+  xlab('Album release date')+
+  ylab('Valence')
 
-year_top_duration_ms = tracks %>%
+year_median_duration_ms = tracks %>%
   group_by(album_release_date) %>%
-  summarise(top_duration_ms = median(duration_ms))
+  summarise(median_duration_ms = mean(duration_ms))
 
-year_top_duration_ms_charts <- ggplot(year_top_duration_ms, aes(x = album_release_date, y = top_duration_ms)) +
-  geom_line(color="orange", size=1.2)+
-  theme_bw()
+year_median_duration_ms_charts <-
+  ggplot(year_median_duration_ms,
+         aes(album_release_date, median_duration_ms)) +
+  geom_line(color = "orange", size = 1.2) +
+  theme_dark()+
+  xlab('Album release date')+
+  ylab('Duration ms')
 
-grid.arrange(year_top_danceability_charts,
-             year_top_energy_charts, 
-             year_top_speechiness_charts, 
-             year_top_liveness_charts,
-             year_top_valence_charts,
-             year_top_duration_ms_charts)
+grid.arrange(
+  year_median_danceability_charts,
+  year_median_energy_charts,
+  year_median_speechiness_charts,
+  year_median_liveness_charts,
+  year_median_valence_charts,
+  year_median_duration_ms_charts
+)
 
 ```
 
