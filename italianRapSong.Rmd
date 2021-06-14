@@ -79,7 +79,8 @@ ggplot(data = popular_artists, aes(x = artist_popularity, y = reorder(artist_nam
   theme(
     axis.line = element_blank(),
     axis.title.y = element_blank()
-  ) 
+  ) +
+  xlab('Artist popularity')
 ```
 
 
@@ -95,13 +96,13 @@ ggplot(data = followest_artists, aes(x = artist_followers, y = reorder(artist_na
   theme_dark()  +
   theme(
     axis.line = element_blank(),
-    axis.title.x = element_blank(),
     axis.title.y = element_blank()
-  )
+  )+
+  xlab('Number of followers')
 
 ```
 
-## Match popularity and followers for top 50 artitst!
+# Matched popularity and followers for top 50 artists!
 ```{css, echo=FALSE}
     .slides {
       zoom: 1 !important;
@@ -141,18 +142,32 @@ top_artists = merge(
   all.x = FALSE,
   fill = -9999
 )
-top_artists['average_popularity'] = top_artists['tot_popularity'] / top_artists['n_songs']
 p <- top_artists %>%
 ggplot(aes(tot_popularity, artist_followers, size = n_songs, color=artist_color, label=artist_name),x.title="aw") +
   geom_point() +
   theme_dark() +
-  theme(legend.position='none')
-ggplotly(p,tooltip = "artist_name")
+  theme(legend.position='none') +
+  xlab('Total popularity')
+ggplotly(p,tooltip = c("artist_name","n_songs","artist_followers","tot_popularity"))
 
 ```
 
 
-## The stats for all songs by Spotify!
+## Matched average popularity and followers for top 50 artists!
+```{r match popularity and followers with average, message=FALSE, echo=FALSE}
+top_artists['average_popularity'] = top_artists['tot_popularity'] / top_artists['n_songs']
+p <- top_artists %>%
+ggplot(aes(average_popularity, artist_followers, size = n_songs, color=artist_color, label=artist_name),x.title="aw") +
+  geom_point() +
+  theme_dark() +
+  theme(legend.position='none') +
+  xlab('Average popularity')
+ggplotly(p,tooltip = c("artist_name","n_songs","artist_followers","tot_popularity"))
+
+```
+
+
+# The stats for all songs by Spotify!
 ```{r point stats, message=FALSE, echo=FALSE}
 
 danceability <-
