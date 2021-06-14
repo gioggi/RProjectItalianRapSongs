@@ -4,7 +4,7 @@ author: "Giovanni Esposito"
 output:
   revealjs::revealjs_presentation:
     theme: moon
-    highlight: monochrome
+    highlight: haddock
 editor_options:
   chunk_output_type: inline
 ---
@@ -38,7 +38,22 @@ library(scales)
     
 ## Dataset
 
-Dataset was created by https://github.com/gioggi/SpotifyScarper.
+<h3>
+Dataset was created use https://github.com/gioggi/SpotifyScarper.<br/>
+Dataset is update to april 2021. <br/>
+about 160 Artists<br/>
+about 11.5k Tracks
+</h3>
+<hr/>
+<h4>
+<b>Key helper</b>:<br/>
+<b>Popularity</b>: Measure the popularity based on play number of the track <br/>
+<b>Valence</b>: a measure of happiness  <br/>
+<b>Liveness</b>: detects the presence of an audience in the recording.  <br/>
+<b>Speechiness</b>: Detects the presence of spoken words in a track. <br/>
+<b>Energy</b>: represents a perceptual measure of intensity and activity. <br/>
+<b>Danceability</b>: describes how suitable a track is for dancing based <br/>
+</h4>
 
 ```{r dataset, message=FALSE, echo=FALSE}
 
@@ -174,29 +189,41 @@ danceability <-
   ggplot(tracks, aes(x = popularity, y = danceability)) +
   geom_point(color = "purple", alpha = 0.2) +
   geom_smooth(se = FALSE) +
-  theme_dark()
+  theme_dark()+
+  xlab('Popularity')+
+  ylab('Danceability')
 energy <- ggplot(tracks, aes(x = popularity, y = energy)) +
   geom_point(color = "red", alpha = 0.2) +
   geom_smooth(se = FALSE) +
-  theme_dark()
+  theme_dark()  +
+  xlab('Popularity')+
+  ylab('Energy')
 speechiness <-
   ggplot(tracks, aes(x = popularity, y = speechiness)) +
   geom_point(color = "lightblue", alpha = 0.2) +
   geom_smooth(se = FALSE) +
-  theme_dark()
+  theme_dark()+
+  xlab('Popularity')+
+  ylab('Speechiness')
 liveness <- ggplot(tracks, aes(x = popularity, y = liveness)) +
   geom_point(color = "green", alpha = 0.2) +
   geom_smooth(se = FALSE) +
-  theme_dark()
+  theme_dark()+
+  xlab('Popularity')+
+  ylab('Liveness')
 valence <- ggplot(tracks, aes(x = popularity, y = valence)) +
   geom_point(color = "blue", alpha = 0.2) +
   geom_smooth(se = FALSE) +
-  theme_dark()
+  theme_dark()+
+  xlab('Popularity')+
+  ylab('Valence')
 duration_ms <-
   ggplot(tracks, aes(x = popularity, y = duration_ms)) +
   geom_point(color = "orange", alpha = 0.2) +
   geom_smooth(se = FALSE) +
-  theme_dark()
+  theme_dark()+
+  xlab('Popularity')+
+  ylab('Duration ms')
 
 grid.arrange(danceability,
              energy,
@@ -219,27 +246,39 @@ top_200_popular_tracks = head(tracks[order(tracks$popularity, decreasing = T), ]
 top_danceability <-
   ggplot(top_200_popular_tracks, aes(x = popularity, y = danceability)) +
   geom_boxplot(fill = "purple") +
-  theme_dark() 
+  theme_dark() +
+  xlab('Popularity')+
+  ylab('Danceability')
 top_energy <-
   ggplot(top_200_popular_tracks, aes(x = popularity, y = energy)) +
   geom_boxplot(fill = "red") +
-  theme_dark() 
+  theme_dark()  +
+  xlab('Popularity')+
+  ylab('Energy')
 top_speechiness <-
   ggplot(top_200_popular_tracks, aes(x = popularity, y = speechiness)) +
   geom_boxplot(fill = "lightblue") +
-  theme_dark() 
+  theme_dark() +
+  xlab('Popularity')+
+  ylab('Speechiness')
 top_liveness <-
   ggplot(top_200_popular_tracks, aes(x = popularity, y = liveness)) +
   geom_boxplot(fill = "green") +
-  theme_dark() 
+  theme_dark() +
+  xlab('Popularity')+
+  ylab('Liveness')
 top_valence <-
   ggplot(top_200_popular_tracks, aes(x = popularity, y = valence)) +
   geom_boxplot(fill = "blue") +
-  theme_dark() 
+  theme_dark() +
+  xlab('Popularity')+
+  ylab('Valence')
 top_duration_ms <-
   ggplot(top_200_popular_tracks, aes(x = popularity, y = duration_ms)) +
   geom_boxplot(fill = "orange") +
-  theme_dark() 
+  theme_dark()+
+  xlab('Popularity')+
+  ylab('Duration ms')
 
 grid.arrange(
   top_danceability,
@@ -252,74 +291,86 @@ grid.arrange(
 
 ```
 
-# Spotify stats in the time!
+# Spotify median stats in the time!
 ```{r stats by date, message=FALSE, echo=FALSE}
 
 
-year_top_danceability = tracks %>%
+year_median_danceability = tracks %>%
   group_by(album_release_date) %>%
-  summarise(top_danceability = median(danceability))
+  summarise(median_danceability = mean(danceability))
 
-year_top_danceability_charts <-
-  ggplot(year_top_danceability,
-         aes(x = album_release_date, y = top_danceability)) +
+year_median_danceability_charts <-
+  ggplot(year_median_danceability,
+         aes( album_release_date, median_danceability)) +
   geom_line(color = "purple", size = 1.2) +
-  theme_dark()
+  theme_dark()+
+  xlab('Album release date')+
+  ylab('Danceability')
 
-year_top_energy = tracks %>%
+year_median_energy = tracks %>%
   group_by(album_release_date) %>%
-  summarise(top_energy = median(energy))
+  summarise(median_energy = mean(energy))
 
-year_top_energy_charts <-
-  ggplot(year_top_energy, aes(x = album_release_date, y = top_energy)) +
+year_median_energy_charts <-
+  ggplot(year_median_energy, aes( album_release_date, median_energy)) +
   geom_line(color = "red", size = 1.2) +
-  theme_dark()
+  theme_dark()+
+  xlab('Album release date')+
+  ylab('Energy')
 
-year_top_speechiness = tracks %>%
+year_median_speechiness = tracks %>%
   group_by(album_release_date) %>%
-  summarise(top_speechiness = median(speechiness))
+  summarise(median_speechiness = mean(speechiness))
 
-year_top_speechiness_charts <-
-  ggplot(year_top_speechiness,
-         aes(x = album_release_date, y = top_speechiness)) +
+year_median_speechiness_charts <-
+  ggplot(year_median_speechiness,
+         aes(album_release_date,median_speechiness)) +
   geom_line(color = "lightblue", size = 1.2) +
-  theme_dark()
+  theme_dark()+
+  xlab('Album release date')+
+  ylab('Speechiness')
 
-year_top_liveness = tracks %>%
+year_median_liveness = tracks %>%
   group_by(album_release_date) %>%
-  summarise(top_liveness = median(liveness))
+  summarise(median_liveness = mean(liveness))
 
-year_top_liveness_charts <-
-  ggplot(year_top_liveness, aes(x = album_release_date, y = top_liveness)) +
+year_median_liveness_charts <-
+  ggplot(year_median_liveness, aes(album_release_date, median_liveness)) +
   geom_line(color = "green", size = 1.2) +
-  theme_dark()
+  theme_dark()+
+  xlab('Album release date')+
+  ylab('Liveness')
 
-year_top_valence = tracks %>%
+year_median_valence = tracks %>%
   group_by(album_release_date) %>%
-  summarise(top_valence = median(valence))
+  summarise(median_valence = mean(valence))
 
-year_top_valence_charts <-
-  ggplot(year_top_valence, aes(x = album_release_date, y = top_valence)) +
+year_median_valence_charts <-
+  ggplot(year_median_valence, aes(album_release_date,median_valence)) +
   geom_line(color = "blue", size = 1.2) +
-  theme_dark()
+  theme_dark()+
+  xlab('Album release date')+
+  ylab('Valence')
 
-year_top_duration_ms = tracks %>%
+year_median_duration_ms = tracks %>%
   group_by(album_release_date) %>%
-  summarise(top_duration_ms = median(duration_ms))
+  summarise(median_duration_ms = mean(duration_ms))
 
-year_top_duration_ms_charts <-
-  ggplot(year_top_duration_ms,
-         aes(x = album_release_date, y = top_duration_ms)) +
+year_median_duration_ms_charts <-
+  ggplot(year_median_duration_ms,
+         aes(album_release_date, median_duration_ms)) +
   geom_line(color = "orange", size = 1.2) +
-  theme_dark()
+  theme_dark()+
+  xlab('Album release date')+
+  ylab('Duration ms')
 
 grid.arrange(
-  year_top_danceability_charts,
-  year_top_energy_charts,
-  year_top_speechiness_charts,
-  year_top_liveness_charts,
-  year_top_valence_charts,
-  year_top_duration_ms_charts
+  year_median_danceability_charts,
+  year_median_energy_charts,
+  year_median_speechiness_charts,
+  year_median_liveness_charts,
+  year_median_valence_charts,
+  year_median_duration_ms_charts
 )
 
 ```
